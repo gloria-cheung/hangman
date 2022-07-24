@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { randomWord } from "./words";
 import "./Hangman.css";
 import img0 from "./0.jpg";
 import img1 from "./1.jpg";
@@ -9,10 +10,11 @@ import img5 from "./5.jpg";
 import img6 from "./6.jpg";
 
 function Hangman(props) {
+  const answer = randomWord();
   const [state, setState] = useState({ 
     nWrong: 0, 
     guessed: new Set(), 
-    answer: "apple" 
+    answer 
   });
 
   const defaultProps = {
