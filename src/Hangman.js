@@ -56,13 +56,17 @@ function Hangman(props) {
     ));
   };
 
+  const altText = `${state.nWrong} / ${defaultProps.maxWrong} guesses`
+
   return (
     <div className='Hangman'>
         <h1>Hangman</h1>
+        <img src={defaultProps.images[state.nWrong]} alt={altText} />
         <p>Guessed Wrong: {state.nWrong}</p>
-        <img src={defaultProps.images[state.nWrong]} />
-        <p className='Hangman-word'>{guessedWord()}</p>
-        <p className='Hangman-btns'>{generateButtons()}</p>
+        <p className='Hangman-word'>{defaultProps.maxWrong > state.nWrong && guessedWord()}</p>
+        <p className='Hangman-btns'>
+          {defaultProps.maxWrong > state.nWrong? generateButtons(): `You lose, answer is ${state.answer}`}
+        </p>
       </div>
   );
 }
