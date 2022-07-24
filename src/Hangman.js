@@ -60,15 +60,30 @@ function Hangman(props) {
 
   const altText = `${state.nWrong} / ${defaultProps.maxWrong} guesses`
 
+  const reset = function() {
+    setState(st => ({
+      guessed: new Set(),
+      nWrong: 0,
+      answer: randomWord()
+    }));
+  }
+
+  const winningPhrase = "You win!";
+  const losingPhrase = "You lose!";
   return (
     <div className='Hangman'>
         <h1>Hangman</h1>
         <img src={defaultProps.images[state.nWrong]} alt={altText} />
         <p>Guessed Wrong: {state.nWrong}</p>
-        <p className='Hangman-word'>{defaultProps.maxWrong > state.nWrong && guessedWord()}</p>
+        <p className='Hangman-word'>
+          {guessedWord().join("") === state.answer && winningPhrase}
+          {defaultProps.maxWrong > state.nWrong && guessedWord().join("") !== state.answer &&guessedWord()}
+          {defaultProps.maxWrong <= state.nWrong && state.answer}
+          </p>
         <p className='Hangman-btns'>
-          {defaultProps.maxWrong > state.nWrong? generateButtons(): `You lose, answer is ${state.answer}`}
+          {defaultProps.maxWrong > state.nWrong? generateButtons(): losingPhrase}
         </p>
+        <button id="reset" onClick={reset}>Reset</button>
       </div>
   );
 }
