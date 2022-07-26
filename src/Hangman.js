@@ -31,7 +31,7 @@ function Hangman(props) {
       .map(ltr => (state.guessed.has(ltr) ? ltr : "_")));
   };
 
-  /** handleGuest: handle a guessed letter:
+  /** handleGuess: handle a guessed letter:
     - add to guessed letters
     - if not in answer, increase number-wrong guesses
   */
@@ -67,21 +67,27 @@ function Hangman(props) {
       answer: randomWord()
     }));
   }
+  
+  const gameOver = state.nWrong >= defaultProps.maxWrong;
+  const isWinner = guessedWord().join("") === state.answer;
+  let gameState = generateButtons();
+  if (isWinner) {
+    gameState = "You win!";
+  }
+  if (gameOver) {
+    gameState = "You lose!";
+  }
 
-  const winningPhrase = "You win!";
-  const losingPhrase = "You lose!";
   return (
     <div className='Hangman'>
         <h1>Hangman</h1>
         <img src={defaultProps.images[state.nWrong]} alt={altText} />
         <p>Guessed Wrong: {state.nWrong}</p>
         <p className='Hangman-word'>
-          {guessedWord().join("") === state.answer && winningPhrase}
-          {defaultProps.maxWrong > state.nWrong && guessedWord().join("") !== state.answer &&guessedWord()}
-          {defaultProps.maxWrong <= state.nWrong && state.answer}
-          </p>
+          {gameOver ? state.answer : guessedWord()}
+        </p>
         <p className='Hangman-btns'>
-          {defaultProps.maxWrong > state.nWrong? generateButtons(): losingPhrase}
+          {gameState}
         </p>
         <button id="reset" onClick={reset}>Reset</button>
       </div>
