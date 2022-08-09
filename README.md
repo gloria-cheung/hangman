@@ -1,16 +1,19 @@
 # Hangman Project
 
-A Hangman application created with Create React App where user guesses the answer word via clicking the available letters. With every wrong guess, a figure is displayed until you either win or lose. 
+A Hangman application created with Create React App where user guesses the answer word via clicking the available letters. With every wrong guess, a figure is displayed until you either win or lose.
 
 ## Final Product
 
-Initial Starting View:
+### Initial Starting View:
+
 !["start"](./public/start.png)
 
-Winning View:
+### Winning View:
+
 !["win"](./public/win.png)
 
-Losing View:
+### Losing View:
+
 !["lose"](./public/lose.png)
 
 ## Getting Started
